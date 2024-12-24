@@ -1,9 +1,3 @@
-/// <summary>
-/// TP Animation de carre version C++.net visual Studio 2017
-/// rev 2024
-/// VERSION ELEVE a completer
-/// </summary>
-
 #pragma once
 
 #include "carre.h"
@@ -41,7 +35,6 @@ namespace tpcarrewineleve {
 			this->timer1->Enabled = true;
 			largeur = this->ClientRectangle.Width;
 			hauteur = this->ClientRectangle.Height;
-
 		}
 
 	protected:
@@ -73,8 +66,6 @@ namespace tpcarrewineleve {
 		/// </summary>
 		int hauteur;
 
-
-
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
@@ -99,7 +90,6 @@ namespace tpcarrewineleve {
 			this->Name = L"Form1";
 			this->Text = L"Form1";
 			this->ResumeLayout(false);
-
 		}
 #pragma endregion
 
@@ -107,7 +97,6 @@ namespace tpcarrewineleve {
 		/// Appelé périodiquement pour redessiner les carrés dans la fenetre
 		/// </summary>
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
-		pcarre1->Animer(this);
+		pcarre1->Animer(this); // Appeler Animer avec la référence de la fenêtre
 	}
-}
-
+};
