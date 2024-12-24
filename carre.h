@@ -152,3 +152,59 @@ public:
 		g->FillRectangle(gcnew SolidBrush(form->BackColor), sx, sy, cote, cote);
 	}
 };
+
+/// <summary>
+/// Classe de gestion de plusieurs carrés animés
+/// </summary>
+ref class CAnimation
+{
+private:
+	CCarre^ carre1; // Premier carré
+	CCarre^ carre2; // Deuxième carré
+
+public:
+	CAnimation()
+	{
+		// Créer les carrés avec des tailles et couleurs différentes
+		carre1 = gcnew CCarre(); // Carré rouge par défaut
+		carre1->SetColor(Color::Red);
+		carre1->SetCote(30); // Carré plus petit
+
+		carre2 = gcnew CCarre(); // Carré bleu
+		carre2->SetColor(Color::Blue);
+		carre2->SetCote(50); // Carré plus grand
+		carre2->Setsx(100); // Position initiale différente
+		carre2->Setsy(100);
+		carre2->dx = 2; // Déplacement plus rapide
+		carre2->dy = 2;
+	}
+
+	/// <summary>
+	/// Anime les deux carrés dans le formulaire
+	/// </summary>
+	/// <param name="form">Formulaire dans lequel les carrés sont animés</param>
+	/// <param name="largeur">Largeur de la fenêtre</param>
+	/// <param name="hauteur">Hauteur de la fenêtre</param>
+	void Animer(System::Windows::Forms::Form^ form, int largeur, int hauteur)
+	{
+		// Anime les deux carrés
+		carre1->Animer(form, largeur, hauteur);
+		carre2->Animer(form, largeur, hauteur);
+	}
+
+	CAnimation^ animation;
+
+	void Form1::Form1_Load(System::Object^ sender, System::EventArgs^ e)
+	{
+		animation = gcnew CAnimation();
+		Timer^ timer = gcnew Timer();
+		timer->Interval = 16;
+		timer->Tick += gcnew EventHandler(this, &Form1::Timer_Tick);
+		timer->Start();
+	}
+
+	void Form1::Timer_Tick(System::Object^ sender, System::EventArgs^ e)
+	{
+		animation->Animer(this, this->ClientSize.Width, this->ClientSize.Height);
+	}
+};
